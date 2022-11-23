@@ -1,0 +1,4 @@
+#patron_correo_sin_numeros = '\w+\@\w+\.\w+'
+#paron_correo_james = '\w+\_\w+\d+\@\w+\.\w+
+#Date = '[A-Z]\w+\s\w+\s\d+\s\W'
+#Date = '[A-z]\s[A-z]\s\d+\s\d+\:\d+\:d+\s\d+'
