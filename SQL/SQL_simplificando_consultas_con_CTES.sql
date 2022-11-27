@@ -27,15 +27,6 @@ AS (                                                       #Dudamos sobre la man
 SELECT *
 FROM info_clientes;
 
-#Para reutilizar la CTE anterior necesitamos un alias, para asi relacionar las dos ctes. Haremos una CTE general dondde luego, a la hora de realizar la consulta final, iltraremos por país
-#probando
-WITH info_clientes (id_cliente, nombre_empresa, pais)
-AS ( 
-	SELECT customer_id company_name, country
-    FROM customers
-    INNER JOIN 
-    )
-
 
 /*3.
 Extraed el id de las facturas y su fecha de cada cliente.
@@ -74,4 +65,15 @@ FROM datos_facturas;
 Cuál la cantidad media pedida de todos los productos ProductID. #AVG products/orders
 Necesitaréis extraer la suma de las cantidades por cada producto y calcular la media.
 */
+
+WITH media_productos_pedidos (nombre_producto, media_productos)
+AS(
+	SELECT products.product_name,  SUM(order_details.quantity) / COUNT(products.product_name) AS media_productos_pedidos
+    FROM order_details
+    INNER JOIN products
+    ON products.product_id = order_details.product_id
+    GROUP BY product_name
+    )
+SELECT *
+FROM media_productos_pedidos;
 
