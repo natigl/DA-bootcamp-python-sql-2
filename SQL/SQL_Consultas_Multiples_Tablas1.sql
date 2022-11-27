@@ -1,11 +1,13 @@
 
+/*EJERCICIOS CONSULTAS EN MULTIPLES TABLAS 1*/
+
+
 USE Northwind;
 
 /* 1pedidos por empresa en UK:
 Desde las oficinas en UK nos han pedido con urgencia que realicemos una consulta a la base de datos con la que podamos conocer 
 cuántos pedidos ha realizado cada empresa cliente de UK. Nos piden el ID del cliente y el nombre de la empresa y el número de pedidos.*/
 
-/*EJERCICIOS CONSULTAS EN MULTIPLES TABLAS 1*/
 
 SELECT customers.customer_id AS Identifcador, customers.company_name AS NombreEmpresa , COUNT(orders.customer_id) AS NumeroPedidos
 FROM customers INNER JOIN orders
@@ -35,9 +37,9 @@ Lo siguiente que nos han pedido es la misma consulta anterior pero con la adici�
 teniendo en cuenta los descuentos, etc. Ojo que los descuentos en nuestra tabla nos salen en porcentajes, 15% nos sale como 0.15.
 La tabla resultante será:*/
 
-#####   DA FALLLOOOOOOOOOO  ######
 
-SELECT customers.company_name AS NombreEmpresa, YEAR(orders.order_date) AS Año, SUM(order_details.quantity) AS NumObjetos, (order_details.unit_price*order_details.quantity) - ((order_details.unit_price*order_details.quantity)*order_details.discount) AS Dinero_total
+SELECT customers.company_name AS NombreEmpresa, YEAR(orders.order_date) AS Año, SUM(order_details.quantity) AS NumObjetos, 
+SUM((order_details.unit_price*order_details.quantity) - ((order_details.unit_price*order_details.quantity)*order_details.discount)) AS Dinero_total
 FROM orders INNER JOIN order_details
 ON orders.order_id = order_details.order_id
 INNER JOIN customers
@@ -47,14 +49,18 @@ GROUP BY customers.company_name, YEAR(orders.order_date)
 ORDER BY customers.company_name;
 
 
+
+
 /*4.BONUS: Pedidos que han realizado cada compañía y su fecha:
 Después de estas solicitudes desde UK y gracias a la utilidad de los resultados que se han obtenido, desde la central nos han pedido una consulta que indique el nombre de cada compañia cliente junto con cada pedido que han realizado y su fecha.
 El resultado deberá ser:*/
 
+SELECT customers.company_name AS NombreEmpresa, orders.order_id as pedido, orders.order_date AS Fecha
+FROM orders
+INNER JOIN customers
+ON customers.customer_id = orders.customer_id
+GROUP BY customers.company_name, orders.order_id, orders.order_date
+ORDER BY customers.company_name;
 
 
-
-/*BONUS: Tipos de producto vendidos:
-Ahora nos piden una lista con cada tipo de producto que se han vendido, sus categorías, nombre de la categoría y el nombre del producto, y el total de dinero por el que se ha vendido cada tipo de producto (teniendo en cuenta los descuentos).
-Pista Necesitaréis usar 3 joins*/
 

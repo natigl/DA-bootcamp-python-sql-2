@@ -11,7 +11,18 @@ que han sido enviados por cada empleado (mostrando el ID de empleado en cada cas
 
 SELECT MAX(freight), employee_id AS Numero_empleado, COUNT(order_id) AS NumPedidos
 FROM orders
-GROUP BY employee_id;
+GROUP BY employee_id; 
+
+/* Si hacemos el select de arriba sin las funciones MAX y COUNT y buscamos por los pedidos de un solo employee, nos devuelve varias filas. Como queremos solo una
+fila con calculos especificos, tenemos que poner el group by para agruparlos por el employee_id, y entonces podemos usar funciones MAX y COUNT
+
+SELECT freight, employee_id AS Numero_empleado, order_id AS NumPedidos
+FROM orders
+WHERE employee_id= 5; 
+
+*/
+
+
 
 
 /* 2. Descartar pedidos sin fecha y ordénalos:
@@ -23,7 +34,8 @@ para que la visualización sea más sencilla.*/
 SELECT MAX(freight), employee_id AS Numero_empleado, COUNT(order_id) AS NumPedidos
 FROM orders
 WHERE NOT shipped_date = 0000-00-00
-GROUP BY employee_id;
+GROUP BY employee_id
+ORDER BY employee_id;  /*Ordenar por employee_id*/
 
 
 /*3.Números de pedidos por día:
@@ -36,16 +48,13 @@ FROM orders
 GROUP BY order_date;
 
 
-
 /* 4. Número de pedidos por mes y año:
 La consulta anterior nos muestra el número de pedidos para cada día concreto, pero esto es demasiado detalle. 
 Genera una modificación de la consulta anterior para que agrupe los pedidos por cada mes concreto de cada año.*/
 
 SELECT COUNT(order_id) AS NumPedidos, MONTH(order_date), YEAR(order_date)
 FROM orders
-GROUP BY order_date;
-
-/*Por cada dia (agrupar)*/
+GROUP BY MONTH(order_date), YEAR(order_date);  /* Debido a que tenemos que mostrar todos los pedidos en cada mes de cada año, el group by tiene que ser en los dos, mes y año */
 
 /* 5. Seleccionad las ciudades con 4 o más empleadas:
 Desde recursos humanos nos piden seleccionar los nombres de las ciudades con 4 o más empleadas de cara 
