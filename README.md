@@ -23,7 +23,8 @@ El repositorio se compone de dos carpetas principales, que corresponden a cada a
             7. Segunda parte de PYTHON + MYSQL
       
  
- 2.MYSQL:
+      2.MYSQL:
+ 
             1. Queries avanzadas, uso de GROUP BY, HAVING Y CASE.
 
             2. Queries es multiples tablas: uso de JOINS. CROSS JOIN, INNER JOIN, NATURAL JOIN...
