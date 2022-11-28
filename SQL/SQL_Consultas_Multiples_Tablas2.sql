@@ -44,9 +44,3 @@ FROM employees AS A, employees AS B
 WHERE A.employee_id <> B.employee_id  
 AND A.city = B.city
 
-
-
-
-/*BONUS: FULL OUTER JOIN Pedidos y empresas con pedidos asociados o no:
-Selecciona todos los pedidos, tengan empresa asociada o no, y todas las empresas tengan pedidos asociados o no. Muestra el ID del pedido, el nombre de la empresa y la fecha del pedido (si existe).
-La tabala resultado deberá similar a:
